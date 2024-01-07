@@ -5,8 +5,23 @@ import { useUser } from "@clerk/clerk-react";
 import { PlusCircle } from "lucide-react";
 import Image from "next/image";
 
+import { api } from "@/convex/_generated/api";
+import { useMutation } from "convex/react";
+import { toast } from "sonner";
+
 const DocumentsPage = () => {
   const { user } = useUser();
+  const create = useMutation(api.documents.create);
+
+  const onCreate = () => {
+    const promise = create({ title: "test" });
+
+    toast.promise(promise, {
+      loading: "Create a new document...",
+      success: "New Document Created!",
+      error: "Failed to create a new document...",
+    });
+  };
 
   return (
     <div className="flex flex-col items-center justify-center h-full space-y-4">
@@ -27,7 +42,7 @@ const DocumentsPage = () => {
       <h2 className="text-lg font-medium">
         Welcome to {user?.firstName}&apos;s Notion
       </h2>
-      <Button>
+      <Button onClick={onCreate}>
         <PlusCircle className="w-4 h-4 mr-2" />
         Create a document
       </Button>
