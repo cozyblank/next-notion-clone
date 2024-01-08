@@ -15,14 +15,13 @@ import { useMediaQuery } from "usehooks-ts";
 import UserItem from "./UserItem";
 
 import { api } from "@/convex/_generated/api";
-import { useMutation, useQuery } from "convex/react";
+import { useMutation } from "convex/react";
 import Item from "./Item";
 import { toast } from "sonner";
 
 const Navigation = () => {
   const pathname = usePathname();
   const isMobile = useMediaQuery("(max-width: 768px)");
-  const documents = useQuery(api.documents.get);
   const create = useMutation(api.documents.create);
 
   const isResizingRef = useRef(false);
@@ -99,7 +98,10 @@ const Navigation = () => {
         "width",
         isMobile ? "0" : "calc(100% - 240px)"
       );
-      navbarRef.current.style.setProperty("left", isMobile ? "100%" : "240px");
+      navbarRef.current.style.setProperty(
+        "left",
+        isMobile ? "100%" : "240px"
+      );
       setTimeout(() => setIsResetting(false), 300);
     }
   };
@@ -124,29 +126,32 @@ const Navigation = () => {
           "h-full overflow-y-auto group bg-secondary relative w-60 flex flex-col z-[99999]",
           isResetting && "transition-all ease-in-out duration-300",
           isMobile && "w-0"
-        )}
-      >
+        )}>
         <div
           onClick={collapse}
           role="button"
           className={cn(
             "absolute w-6 h-6 transition rounded-sm opacity-0 text-muted-foreground hover:bg-neutral-300 dark:hover:bg-neutral-600 top-3 right-2 group-hover:opacity-100",
             isMobile && "opacity-100"
-          )}
-        >
+          )}>
           <ChevronsLeft className="w-6 h-6" />
         </div>
         <div>
           <UserItem />
-          <Item onClick={() => {}} label="Search" icon={Search} isSearch />
+          <Item
+            onClick={() => {}}
+            label="Search"
+            icon={Search}
+            isSearch
+          />
           <Item onClick={() => {}} label="Settings" icon={Settings} />
-          <Item onClick={handleCreate} label="New Document" icon={PlusCircle} />
+          <Item
+            onClick={handleCreate}
+            label="New Document"
+            icon={PlusCircle}
+          />
         </div>
-        <div className="mt-4">
-          {documents?.map((document) => (
-            <p key={document._id}>{document.title}</p>
-          ))}
-        </div>
+        <div className="mt-4"></div>
         <div
           onMouseDown={handleMouseDown}
           onClick={resetWidth}
@@ -159,8 +164,7 @@ const Navigation = () => {
           "absolute top-0 left-60 z-[99999] w-[calc(100% - 240px)]",
           isResetting && "transition-all ease-in-out",
           isMobile && "left-0 w-full"
-        )}
-      >
+        )}>
         <nav className="w-full px-3 py-2 bg-transparent">
           {isCollapsed && (
             <MenuIcon
