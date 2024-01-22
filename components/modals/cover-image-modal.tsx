@@ -7,6 +7,7 @@ import { useParams } from "next/navigation";
 import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
+import axios from "axios";
 
 export const CoverImageModal = () => {
   const params = useParams();
@@ -27,6 +28,14 @@ export const CoverImageModal = () => {
     if (file) {
       setIsSubmitting(true);
       setFile(file);
+
+      if (coverImage.url) {
+        let result = await axios.post("/api/images/destroy", {
+          url: coverImage.url,
+        });
+
+        console.log("Result: ", result);
+      }
     }
 
     await update({

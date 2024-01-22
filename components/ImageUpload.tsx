@@ -16,8 +16,6 @@ interface ImageUploadProps {
   onClose: () => void;
 }
 
-const uploadPreset = "eqxzr2mi";
-
 const ImageUpload = ({
   onChange,
   value,
@@ -36,7 +34,7 @@ const ImageUpload = ({
   return (
     <CldUploadWidget
       onUpload={handleUpload}
-      uploadPreset={uploadPreset}
+      uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_PRESET}
       options={{
         maxFiles: 1,
       }}>
