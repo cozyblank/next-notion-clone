@@ -41,7 +41,7 @@ const ImageUpload = ({
       {({ open }) => {
         return (
           <div
-            className="z-[99999] my-4 mx-auto p-4 w-1/2 md:w-1/4 max-w-md bg-white rounded-lg border border-gray-200 shadow-md top-[25vh] md:left-[50%] left-[30%] fixed h-[200px]"
+            className="z-[99999] my-4 mx-auto p-4 w-1/2 md:w-1/4 max-w-md bg-white rounded-lg border border-gray-200 shadow-md top-[20vh] md:left-[40%] left-[30%] fixed h-[300px]"
             onClick={(e) => e.stopPropagation()}>
             <div
               onClick={() => open()}
@@ -51,9 +51,10 @@ const ImageUpload = ({
             </div>
 
             <X
-              className="absolute -right-3 -top-3"
+              color="gray"
+              className="absolute -right-4 -top-4"
               onClick={() => onClose()}
-              size={30}
+              size={40}
             />
 
             {value && (

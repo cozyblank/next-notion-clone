@@ -10,6 +10,7 @@ import { api } from "@/convex/_generated/api";
 import { useParams } from "next/navigation";
 import { Id } from "@/convex/_generated/dataModel";
 import axios from "axios";
+import { Skeleton } from "./ui/skeleton";
 
 interface CoverImageProps {
   url?: string;
@@ -34,7 +35,9 @@ export const Cover = ({ url, preview }: CoverImageProps) => {
       await removeCoverImage({
         id: params.documentId as Id<"documents">,
       });
-    } catch (error) {}
+    } catch (error) {
+      console.log("Error: ", error);
+    }
   };
 
   return (
@@ -54,26 +57,30 @@ export const Cover = ({ url, preview }: CoverImageProps) => {
       )}
 
       {url && !preview && (
-        <div className="opacity-0 group-hover:opacity-100 absolute bottom-5 right-5 flex items-center gap-x-2">
+        <div className="absolute flex items-center opacity-0 group-hover:opacity-100 bottom-5 right-5 gap-x-2">
           <Button
             onClick={() => coverImage.onReplace(url)}
-            className="text-muted-foreground text-xs"
+            className="text-xs text-muted-foreground"
             variant="outline"
             size="sm">
-            <ImageIcon className="h-4 w-4 mr-2" />
+            <ImageIcon className="w-4 h-4 mr-2" />
             Change Cover
           </Button>
 
           <Button
             onClick={onRemove}
-            className="text-muted-foreground text-xs"
+            className="text-xs text-muted-foreground"
             variant="outline"
             size="sm">
-            <X className="h-4 w-4 mr-2" />
+            <X className="w-4 h-4 mr-2" />
             Remove Cover
           </Button>
         </div>
       )}
     </div>
   );
+};
+
+Cover.Skeleton = function CoverSkeleton() {
+  return <Skeleton className="w-full h-[12vh]" />;
 };
