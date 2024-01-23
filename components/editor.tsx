@@ -5,6 +5,7 @@ import { BlockNoteEditor, PartialBlock } from "@blocknote/core";
 import { BlockNoteView, useBlockNote } from "@blocknote/react";
 import "@blocknote/react/style.css";
 import axios from "axios";
+import { useOrigin } from "@/hooks/use-origin";
 
 interface EditorProps {
   onChange: (value: string) => void;
@@ -17,6 +18,7 @@ const Editor = ({
   initialContent,
   editable,
 }: EditorProps) => {
+  const origin = useOrigin();
   const { resolvedTheme } = useTheme();
 
   const handleUpload = async (file: File) => {
@@ -25,7 +27,7 @@ const Editor = ({
       formData.append("file", file);
 
       const response = await axios.post(
-        "/api/images/upload",
+        `${origin}/api/images/upload`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },

@@ -11,6 +11,7 @@ import { useParams } from "next/navigation";
 import { Id } from "@/convex/_generated/dataModel";
 import axios from "axios";
 import { Skeleton } from "./ui/skeleton";
+import { useOrigin } from "@/hooks/use-origin";
 
 interface CoverImageProps {
   url?: string;
@@ -18,6 +19,7 @@ interface CoverImageProps {
 }
 
 export const Cover = ({ url, preview }: CoverImageProps) => {
+  const origin = useOrigin();
   const params = useParams();
   const coverImage = useCoverImage();
   const removeCoverImage = useMutation(
@@ -26,7 +28,7 @@ export const Cover = ({ url, preview }: CoverImageProps) => {
 
   const onRemove = async () => {
     try {
-      let result = await axios.post("/api/images/destroy", {
+      let result = await axios.post(`${origin}/api/images/destroy`, {
         url,
       });
 
