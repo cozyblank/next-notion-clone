@@ -48,7 +48,7 @@ const Item = ({
   expanded,
   isSearch,
   level = 0,
-  onExpand,
+  onExpand, 
 }: ItemProps) => {
   const router = useRouter();
   const create = useMutation(api.documents.create);
