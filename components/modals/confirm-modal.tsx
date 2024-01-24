@@ -36,7 +36,7 @@ export const ConfirmModal = ({
         {children}
       </AlertDialogTrigger>
       <AlertDialogContent>
-        <AlertDialogHeader>
+        <AlertDialogHeader className="dark:text-white">
           <AlertDialogTitle>
             Are you sure you want to delete?
           </AlertDialogTitle>
@@ -46,7 +46,9 @@ export const ConfirmModal = ({
         </AlertDialogHeader>
 
         <AlertDialogFooter>
-          <AlertDialogCancel onClick={(e) => e.stopPropagation()}>
+          <AlertDialogCancel
+            className="dark:text-white"
+            onClick={(e) => e.stopPropagation()}>
             Cancel
           </AlertDialogCancel>
           <AlertDialogAction onClick={handleConfirm}>
