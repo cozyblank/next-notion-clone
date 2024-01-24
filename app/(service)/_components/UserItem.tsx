@@ -20,26 +20,23 @@ const UserItem = () => {
       <DropdownMenuTrigger asChild>
         <div
           role="button"
-          className="flex items-center w-full p-3 text-sm hover:bg-primary/5"
-        >
+          className="flex items-center w-full p-3 text-sm hover:bg-primary/5 dark:text-white">
           <div className="gap-x-2 flex items-center max-w-[150px]">
             <Avatar className="w-5 h-5">
               <AvatarImage src={user?.imageUrl} />
             </Avatar>
-            <span className="text-start font-meium line-clamp-1">
+            <span className="text-start font-medium line-clamp-1">
               {user?.fullName}&apos;s Notion
             </span>
           </div>
           <ChevronsLeftRight className="w-4 h-4 ml-2 rotate-90 text-muted-foreground" />
         </div>
       </DropdownMenuTrigger>
-      {/*  */}
       <DropdownMenuContent
         className="w-80"
         align="start"
         alignOffset={11}
-        forceMount
-      >
+        forceMount>
         <div className="flex flex-col p-2 space-y-4">
           <p className="text-xs font-medium leading-none text-muted-foreground">
             {user?.emailAddresses[0].emailAddress}
@@ -62,8 +59,7 @@ const UserItem = () => {
         <DropdownMenuSeparator />
         <DropdownMenuItem
           asChild
-          className="w-full cursor-pointer text-muted-foreground"
-        >
+          className="w-full cursor-pointer text-muted-foreground">
           <SignOutButton>Logout</SignOutButton>
         </DropdownMenuItem>
       </DropdownMenuContent>

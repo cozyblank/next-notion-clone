@@ -18,7 +18,6 @@ const Editor = ({
   initialContent,
   editable,
 }: EditorProps) => {
-  const origin = useOrigin();
   const { resolvedTheme } = useTheme();
 
   const handleUpload = async (file: File) => {
@@ -27,14 +26,14 @@ const Editor = ({
       formData.append("file", file);
 
       const response = await axios.post(
-        `${origin}/api/images/upload`,
+        "/api/images/upload",
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
         }
       );
 
-      return response.data.result.secure_url;
+      return response.data.imageUrl;
     } catch (error) {
       console.log("Error: ", error);
     }

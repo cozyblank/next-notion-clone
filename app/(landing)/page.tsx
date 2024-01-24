@@ -1,4 +1,3 @@
-import React from "react";
 import Heading from "./_components/Heading";
 import Heroes from "./_components/Heroes";
 import Footer from "./_components/Footer";
