@@ -53,7 +53,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
   try {
     const uploadToCloudinary = () => {
       return new Promise((resolve, reject) => {
-        let result = cloudinary.v2.uploader
+        cloudinary.v2.uploader
           .unsigned_upload(
             fileUri,
             process.env.NEXT_PUBLIC_CLOUDINARY_PRESET!
@@ -69,7 +69,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
     };
 
     const result = await uploadToCloudinary();
-    let imageUrl = result.secure_url;
+    let imageUrl = (result as any).secure_url;
 
     return NextResponse.json(
       {
